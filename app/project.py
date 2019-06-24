@@ -49,6 +49,14 @@ while True:
         print("The travel mode was incorrectly entered. Please try again: ")
 
 
+# WEATHER
+
+weather_api_key = os.environ.get("weather_api_key")
+
+# NEWS
+
+news_api_key = os.environ.get("news_api_key")
+
 
 
 # import json, urllib, urllib.parse
