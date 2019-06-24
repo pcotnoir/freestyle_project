@@ -24,9 +24,17 @@ directions_result = gmaps.directions(origin,
                                      departure_time=now
                                     )
 
-print(directions_result[0]['legs'][0]['distance']['text'])
-print(directions_result[0]['legs'][0]['duration']['text'])
-print(directions_result[0]['legs'][0]['arrival_time']['text'])
+
+if preferred_transport == "driving" or "bicycling" or "walking":
+    print(directions_result[0]['legs'][0]['distance']['text'])
+    print(directions_result[0]['legs'][0]['duration']['text'])
+elif preferred_transport == "transit":
+    print(directions_result[0]['legs'][0]['distance']['text'])
+    print(directions_result[0]['legs'][0]['duration']['text'])
+    print(directions_result[0]['legs'][0]['arrival_time']['text'])
+else:
+    print("Incorrect travel mode")
+
 
 
 # import json, urllib, urllib.parse
