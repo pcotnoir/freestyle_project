@@ -12,10 +12,12 @@ from datetime import datetime
 gmaps_api_key = os.environ.get("gmaps_api_key")
 gmaps = googlemaps.Client(key=gmaps_api_key)
 
+origin = input("Please enter the origin address: ")
+destination = input("Please enter the destination address: ")
 
 now = datetime.now()
-directions_result = gmaps.directions("900 President Street Brooklyn, NY 11215",
-                                     "750 Broadway New York, NY 10036",
+directions_result = gmaps.directions(origin,
+                                     destination,
                                      mode="transit",
                                      avoid="ferries",
                                      departure_time=now
