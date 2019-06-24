@@ -1,4 +1,3 @@
-
 import json
 import os
 from dotenv import load_dotenv
@@ -9,31 +8,46 @@ load_dotenv()
 import googlemaps
 from datetime import datetime
 
+now = datetime.now()
+
 gmaps_api_key = os.environ.get("gmaps_api_key")
 gmaps = googlemaps.Client(key=gmaps_api_key)
 
 origin = input("Please enter the origin address: ")
 destination = input("Please enter the destination address: ")
-preferred_transport = input("Please select your preferred transport: driving, bicycling, transit, walking: ")
 
-now = datetime.now()
-directions_result = gmaps.directions(origin,
-                                     destination,
-                                     mode=preferred_transport,
-                                     avoid="ferries",
-                                     departure_time=now
-                                    )
+while True:
+    preferred_transport = input("Please select your preferred transport: driving, bicycling, transit, walking: ")
+    if preferred_transport == "driving":
+        directions_route = preferred_transport
+        break
+    if preferred_transport == "bicycling":
+        directions_route = preferred_transport
+        break
+    if preferred_transport == "walking":
+        directions_route = preferred_transport
+        break
+    if preferred_transport == "transit":
+        directions_route = preferred_transport
+        break
+    elif preferred_transport != "driving" or "bicycling" or "walking" or "transit":
+        print("You entered an invalid preferred transport. Please try again: ")
 
+directions_result = gmaps.directions(origin, destination, mode = directions_route, avoid = "ferries", departure_time=now)
 
-if preferred_transport == "driving" or "bicycling" or "walking":
-    print(directions_result[0]['legs'][0]['distance']['text'])
-    print(directions_result[0]['legs'][0]['duration']['text'])
-elif preferred_transport == "transit":
-    print(directions_result[0]['legs'][0]['distance']['text'])
-    print(directions_result[0]['legs'][0]['duration']['text'])
-    print(directions_result[0]['legs'][0]['arrival_time']['text'])
-else:
-    print("Incorrect travel mode")
+while True:
+    if directions_route == "driving" or "bicycling" or "walking":
+        print(directions_result[0]['legs'][0]['distance']['text'])
+        print(directions_result[0]['legs'][0]['duration']['text'])
+        break
+    if directions_route == "transit":
+        print(directions_result[0]['legs'][0]['distance']['text'])
+        print(directions_result[0]['legs'][0]['duration']['text'])
+        print(directions_result[0]['legs'][0]['arrival_time']['text']) #NEED TO FIX. NOTHING APPEARS
+        break
+    else:
+        print("Incorrect travel mode")
+
 
 
 
