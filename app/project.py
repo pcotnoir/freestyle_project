@@ -46,7 +46,7 @@ while True:
         print("You will arrive at", directions_result[0]['legs'][0]['arrival_time']['text'], ".") #NEED TO FIX. NOTHING APPEARS
         break
     else:
-        print("Incorrect travel mode. Please try again: ")
+        print("The travel mode was incorrectly entered. Please try again: ")
 
 
 
