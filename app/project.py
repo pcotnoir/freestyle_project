@@ -37,16 +37,16 @@ directions_result = gmaps.directions(origin, destination, mode = directions_rout
 
 while True:
     if directions_route == "driving" or "bicycling" or "walking":
-        print(directions_result[0]['legs'][0]['distance']['text'])
-        print(directions_result[0]['legs'][0]['duration']['text'])
+        print("You are", directions_result[0]['legs'][0]['distance']['text'], "from your destination.")
+        print("Your commute time will be", directions_result[0]['legs'][0]['duration']['text'], ".")
         break
     if directions_route == "transit":
-        print(directions_result[0]['legs'][0]['distance']['text'])
-        print(directions_result[0]['legs'][0]['duration']['text'])
-        print(directions_result[0]['legs'][0]['arrival_time']['text']) #NEED TO FIX. NOTHING APPEARS
+        print("You are", directions_result[0]['legs'][0]['distance']['text'], "from your destination.")
+        print("Your commute time will be", directions_result[0]['legs'][0]['duration']['text'], ".")
+        print("You will arrive at", directions_result[0]['legs'][0]['arrival_time']['text'], ".") #NEED TO FIX. NOTHING APPEARS
         break
     else:
-        print("Incorrect travel mode")
+        print("Incorrect travel mode. Please try again: ")
 
 
 
