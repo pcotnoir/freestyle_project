@@ -10,52 +10,66 @@ from datetime import datetime
 
 now = datetime.now()
 
-gmaps_api_key = os.environ.get("gmaps_api_key")
-gmaps = googlemaps.Client(key=gmaps_api_key)
-
-origin = input("Please enter the origin address: ")
-destination = input("Please enter the destination address: ")
-
-while True:
-    preferred_transport = input("Please select your preferred transport: driving, bicycling, transit, walking: ")
-    if preferred_transport == "driving":
-        directions_route = preferred_transport
-        break
-    if preferred_transport == "bicycling":
-        directions_route = preferred_transport
-        break
-    if preferred_transport == "walking":
-        directions_route = preferred_transport
-        break
-    if preferred_transport == "transit":
-        directions_route = preferred_transport
-        break
-    elif preferred_transport != "driving" or "bicycling" or "walking" or "transit":
-        print("You entered an invalid preferred transport. Please try again: ")
-
-directions_result = gmaps.directions(origin, destination, mode = directions_route, avoid = "ferries", departure_time=now)
-
-while True:
-    if directions_route == "driving" or "bicycling" or "walking":
-        print("You are", directions_result[0]['legs'][0]['distance']['text'], "from your destination.")
-        print("Your commute time will be", directions_result[0]['legs'][0]['duration']['text'], ".")
-        break
-    if directions_route == "transit":
-        print("You are", directions_result[0]['legs'][0]['distance']['text'], "from your destination.")
-        print("Your commute time will be", directions_result[0]['legs'][0]['duration']['text'], ".")
-        print("You will arrive at", directions_result[0]['legs'][0]['arrival_time']['text'], ".") #NEED TO FIX. NOTHING APPEARS
-        break
-    else:
-        print("The travel mode was incorrectly entered. Please try again: ")
+# gmaps_api_key = os.environ.get("gmaps_api_key")
+# gmaps = googlemaps.Client(key=gmaps_api_key)
+# 
+# origin = input("Please enter the origin address: ")
+# destination = input("Please enter the destination address: ")
+# 
+# while True:
+#     preferred_transport = input("Please select your preferred transport: driving, bicycling, transit, walking: ")
+#     if preferred_transport == "driving":
+#         directions_route = preferred_transport
+#         break
+#     if preferred_transport == "bicycling":
+#         directions_route = preferred_transport
+#         break
+#     if preferred_transport == "walking":
+#         directions_route = preferred_transport
+#         break
+#     if preferred_transport == "transit":
+#         directions_route = preferred_transport
+#         break
+#     elif preferred_transport != "driving" or "bicycling" or "walking" or "transit":
+#         print("You entered an invalid preferred transport. Please try again: ")
+# 
+# directions_result = gmaps.directions(origin, destination, mode = directions_route, avoid = "ferries", departure_time=now)
+# 
+# while True:
+#     if directions_route == "driving" or "bicycling" or "walking":
+#         print("You are", directions_result[0]['legs'][0]['distance']['text'], "from your destination.")
+#         print("Your commute time will be", directions_result[0]['legs'][0]['duration']['text'], ".")
+#         break
+#     if directions_route == "transit":
+#         print("You are", directions_result[0]['legs'][0]['distance']['text'], "from your destination.")
+#         print("Your commute time will be", directions_result[0]['legs'][0]['duration']['text'], ".")
+#         print("You will arrive at", directions_result[0]['legs'][0]['arrival_time']['text'], ".") #NEED TO FIX. NOTHING APPEARS
+#         break
+#     else:
+#         print("The travel mode was incorrectly entered. Please try again: ")
 
 
 # WEATHER
 
 weather_api_key = os.environ.get("weather_api_key")
 
-# NEWS
+while True:
+    zip_code = input("Please enter a 5 digit .zip code for your weather report: ")
+    if not zip_code.isdigit():
+        print("Your .zip code contains non-numerical digits. Please try again: ")
+    if len(zip_code) >5:
+        print("Your .zip code contains too many digits. Please try again: ")
+    if len(zip_code) <5:
+        print("Your .zip code contains too few digits. Please try again: ")
+    if zip_code.isdigit() and len(zip_code) == 5:
+        break
 
-news_api_key = os.environ.get("news_api_key")
+# fullWeather = requests.get('https://api.openweathermap.org/data/2.5/forecast?zip=20057&APPID='+OPENWEATHER_API_KEY)
+
+
+# NEWS
+#import newsapi.newsapi_client import NewsApiClient
+#news_api_key = os.environ.get("news_api_key")
 
 
 
