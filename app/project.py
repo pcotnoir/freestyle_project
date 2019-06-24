@@ -14,11 +14,12 @@ gmaps = googlemaps.Client(key=gmaps_api_key)
 
 origin = input("Please enter the origin address: ")
 destination = input("Please enter the destination address: ")
+preferred_transport = input("Please select your preferred transport: driving, bicycling, transit, walking: ")
 
 now = datetime.now()
 directions_result = gmaps.directions(origin,
                                      destination,
-                                     mode="transit",
+                                     mode=preferred_transport,
                                      avoid="ferries",
                                      departure_time=now
                                     )
