@@ -1,3 +1,4 @@
+import requests
 import json
 import os
 from dotenv import load_dotenv
@@ -64,8 +65,29 @@ while True:
     if zip_code.isdigit() and len(zip_code) == 5:
         break
 
-# fullWeather = requests.get('https://api.openweathermap.org/data/2.5/forecast?zip=20057&APPID='+OPENWEATHER_API_KEY)
+def temp_format(temperatures):
+    return '{:,.2f}'.format(temperatures)
 
+weather_url = "https://api.openweathermap.org/data/2.5/weather?" + "appid=" + weather_api_key + "&q=" + zip_code
+forecast_response = requests.get(weather_url)
+response_key = forecast_response.json() # https://www.geeksforgeeks.org/python-find-current-weather-of-any-city-using-openweathermap-api/
+if response_key["cod"] != "404":
+    main_key = response_key["main"]
+    current_temp = main_key["temp"]
+    kelvin2fahrenheit = (int(current_temp) - 273.15) * (9/5) + 32
+    weather_key = response_key["weather"]
+    describe_weather = weather_key[0]["description"]
+    print("The current temperature is " + str(temp_format(kelvin2fahrenheit)) + " degrees Fahrenheit" +
+    "\n and is " + str(describe_weather))
+else:
+    print(".zip code not found. Please try again: ")
+
+#temperature = TemperatureParser(weather_url)
+#will_it_rain = RainParser(weather_url)
+#if will_it_rain == {'Rain'}:
+#  rain = True
+#else:
+#  rain = False
 
 # NEWS
 #import newsapi.newsapi_client import NewsApiClient
