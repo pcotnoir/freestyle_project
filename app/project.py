@@ -52,46 +52,49 @@ now = datetime.now()
 
 # WEATHER
 
-weather_api_key = os.environ.get("weather_api_key")
-
-while True:
-    zip_code = input("Please enter a 5 digit .zip code for your weather report: ")
-    if not zip_code.isdigit():
-        print("Your .zip code contains non-numerical digits. Please try again: ")
-    if len(zip_code) >5:
-        print("Your .zip code contains too many digits. Please try again: ")
-    if len(zip_code) <5:
-        print("Your .zip code contains too few digits. Please try again: ")
-    if zip_code.isdigit() and len(zip_code) == 5:
-        break
-
-def temp_format(temperatures):
-    return '{:,.2f}'.format(temperatures)
-
-weather_url = "https://api.openweathermap.org/data/2.5/weather?" + "appid=" + weather_api_key + "&q=" + zip_code
-forecast_response = requests.get(weather_url)
-response_key = forecast_response.json() # https://www.geeksforgeeks.org/python-find-current-weather-of-any-city-using-openweathermap-api/
-if response_key["cod"] != "404":
-    main_key = response_key["main"]
-    current_temp = main_key["temp"]
-    kelvin2fahrenheit = (int(current_temp) - 273.15) * (9/5) + 32
-    weather_key = response_key["weather"]
-    describe_weather = weather_key[0]["description"]
-    print("The current temperature is " + str(temp_format(kelvin2fahrenheit)) + " degrees Fahrenheit" +
-    "\n and is " + str(describe_weather))
-else:
-    print(".zip code not found. Please try again: ")
-
-#temperature = TemperatureParser(weather_url)
-#will_it_rain = RainParser(weather_url)
-#if will_it_rain == {'Rain'}:
-#  rain = True
-#else:
-#  rain = False
+# weather_api_key = os.environ.get("weather_api_key")
+# 
+# while True:
+#     zip_code = input("Please enter a 5 digit .zip code for your weather report: ")
+#     if not zip_code.isdigit():
+#         print("Your .zip code contains non-numerical digits. Please try again: ")
+#     if len(zip_code) >5:
+#         print("Your .zip code contains too many digits. Please try again: ")
+#     if len(zip_code) <5:
+#         print("Your .zip code contains too few digits. Please try again: ")
+#     if zip_code.isdigit() and len(zip_code) == 5:
+#         break
+# 
+# def temp_format(temperatures):
+#     return '{:,.2f}'.format(temperatures)
+# 
+# weather_url = "https://api.openweathermap.org/data/2.5/weather?" + "appid=" + weather_api_key + "&q=" + zip_code
+# forecast_response = requests.get(weather_url)
+# response_key = forecast_response.json() # https://www.geeksforgeeks.org/python-find-current-weather-of-any-city-using-openweathermap-api/
+# if response_key["cod"] != "404":
+#     main_key = response_key["main"]
+#     current_temp = main_key["temp"]
+#     kelvin2fahrenheit = (int(current_temp) - 273.15) * (9/5) + 32
+#     weather_key = response_key["weather"]
+#     describe_weather = weather_key[0]["description"]
+#     print("The current temperature is " + str(temp_format(kelvin2fahrenheit)) + " degrees Fahrenheit" +
+#     "\n and is " + str(describe_weather))
+# else:
+#     print(".zip code not found. Please try again: ")
 
 # NEWS
-#import newsapi.newsapi_client import NewsApiClient
-#news_api_key = os.environ.get("news_api_key")
+from newsapi.newsapi_client import NewsApiClient
+news_api_key = os.environ.get("news_api_key")
+
+news_api_var = NewsApiClient(api_key=news_api_key)
+
+nyt_news_stories = newsapi.get_top_headlines(sources='the-new-york-times')
+
+
+
+
+
+
 
 
 
