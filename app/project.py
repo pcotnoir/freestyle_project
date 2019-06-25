@@ -70,19 +70,27 @@ news_api_key = os.environ.get("news_api_key")
 
 
 #USER OUTPUTS
+
+#Commute Times
+print("\n")
+print("\n")
+print("Commute Information: ")
 while True:
     if directions_route == "driving" or "bicycling" or "walking":
         print("You are", directions_result[0]['legs'][0]['distance']['text'], "from your destination."
-        " Your commute time will be", directions_result[0]['legs'][0]['duration']['text'], ".")
+        " Your commute time will be", directions_result[0]['legs'][0]['duration']['text'],".")
         break
     if directions_route == "transit":
         print("You are", directions_result[0]['legs'][0]['distance']['text'], "from your destination."
-        " Your commute time will be", directions_result[0]['legs'][0]['duration']['text'], "."
+        " Your commute time will be", directions_result[0]['legs'][0]['duration']['text'],"."
         " You will arrive at", directions_result[0]['legs'][0]['arrival_time']['text'], ".") #NEED TO FIX. NOTHING APPEARS
         break
     else:
         print("The travel mode was incorrectly entered. Please try again: ")
 
+#Weather
+print("\n")
+print("Today's weather forecast in your area: ")
 if response_key["cod"] != "404":
     main_key = response_key["main"]
     current_temp = main_key["temp"]
@@ -90,9 +98,13 @@ if response_key["cod"] != "404":
     weather_key = response_key["weather"]
     describe_weather = weather_key[0]["description"]
     weather_output = print("The current temperature is " + str(temp_format(kelvin2fahrenheit)) + " degrees Fahrenheit" +
-    "\n and is " + str(describe_weather))
+    " with " + str(describe_weather) + ".")
 else:
     print(".zip code not found. Please try again: ")
+
+#News
+print("\n")
+print("Today's news briefing from the New York Times: ")
 
 def NYTNews(): 
     NYT_url = " https://newsapi.org/v1/articles?source=the-new-york-times&sortBy=top&apiKey=" + news_api_key #https://www.geeksforgeeks.org/fetching-top-news-using-news-api/
@@ -110,7 +122,7 @@ def NYTNews():
     for k in range(len(top_news_titles)): 
         print(k+1,".", top_news_titles[k], "\n")
         print(top_news_descriptions[k], "\n") 
-        print(top_news_urls[k], "\n")                 
+        print(top_news_urls[k], "\n", "\n")                 
 
 if __name__ == '__main__': 
      NYTNews()  #invoke the function
