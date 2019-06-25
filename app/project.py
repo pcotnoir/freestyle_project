@@ -11,80 +11,88 @@ from datetime import datetime
 
 now = datetime.now()
 
-# gmaps_api_key = os.environ.get("gmaps_api_key")
-# gmaps = googlemaps.Client(key=gmaps_api_key)
-# 
-# origin = input("Please enter the origin address: ")
-# destination = input("Please enter the destination address: ")
-# 
-# while True:
-#     preferred_transport = input("Please select your preferred transport: driving, bicycling, transit, walking: ")
-#     if preferred_transport == "driving":
-#         directions_route = preferred_transport
-#         break
-#     if preferred_transport == "bicycling":
-#         directions_route = preferred_transport
-#         break
-#     if preferred_transport == "walking":
-#         directions_route = preferred_transport
-#         break
-#     if preferred_transport == "transit":
-#         directions_route = preferred_transport
-#         break
-#     elif preferred_transport != "driving" or "bicycling" or "walking" or "transit":
-#         print("You entered an invalid preferred transport. Please try again: ")
-# 
-# directions_result = gmaps.directions(origin, destination, mode = directions_route, avoid = "ferries", departure_time=now)
-# 
-# while True:
-#     if directions_route == "driving" or "bicycling" or "walking":
-#         print("You are", directions_result[0]['legs'][0]['distance']['text'], "from your destination.")
-#         print("Your commute time will be", directions_result[0]['legs'][0]['duration']['text'], ".")
-#         break
-#     if directions_route == "transit":
-#         print("You are", directions_result[0]['legs'][0]['distance']['text'], "from your destination.")
-#         print("Your commute time will be", directions_result[0]['legs'][0]['duration']['text'], ".")
-#         print("You will arrive at", directions_result[0]['legs'][0]['arrival_time']['text'], ".") #NEED TO FIX. NOTHING APPEARS
-#         break
-#     else:
-#         print("The travel mode was incorrectly entered. Please try again: ")
+gmaps_api_key = os.environ.get("gmaps_api_key")
+gmaps = googlemaps.Client(key=gmaps_api_key)
+
+origin = input("Please enter the origin address: ")
+destination = input("Please enter the destination address: ")
+
+while True:
+    preferred_transport = input("Please select your preferred transport: driving, bicycling, transit, walking: ")
+    if preferred_transport == "driving":
+        directions_route = preferred_transport
+        break
+    if preferred_transport == "bicycling":
+        directions_route = preferred_transport
+        break
+    if preferred_transport == "walking":
+        directions_route = preferred_transport
+        break
+    if preferred_transport == "transit":
+        directions_route = preferred_transport
+        break
+    elif preferred_transport != "driving" or "bicycling" or "walking" or "transit":
+        print("You entered an invalid preferred transport. Please try again: ")
+
+directions_result = gmaps.directions(origin, destination, mode = directions_route, avoid = "ferries", departure_time=now)
+
+
 
 
 # WEATHER
 
-# weather_api_key = os.environ.get("weather_api_key")
-# 
-# while True:
-#     zip_code = input("Please enter a 5 digit .zip code for your weather report: ")
-#     if not zip_code.isdigit():
-#         print("Your .zip code contains non-numerical digits. Please try again: ")
-#     if len(zip_code) >5:
-#         print("Your .zip code contains too many digits. Please try again: ")
-#     if len(zip_code) <5:
-#         print("Your .zip code contains too few digits. Please try again: ")
-#     if zip_code.isdigit() and len(zip_code) == 5:
-#         break
-# 
-# def temp_format(temperatures):
-#     return '{:,.2f}'.format(temperatures)
-# 
-# weather_url = "https://api.openweathermap.org/data/2.5/weather?" + "appid=" + weather_api_key + "&q=" + zip_code
-# forecast_response = requests.get(weather_url)
-# response_key = forecast_response.json() # https://www.geeksforgeeks.org/python-find-current-weather-of-any-city-using-openweathermap-api/
-# if response_key["cod"] != "404":
-#     main_key = response_key["main"]
-#     current_temp = main_key["temp"]
-#     kelvin2fahrenheit = (int(current_temp) - 273.15) * (9/5) + 32
-#     weather_key = response_key["weather"]
-#     describe_weather = weather_key[0]["description"]
-#     print("The current temperature is " + str(temp_format(kelvin2fahrenheit)) + " degrees Fahrenheit" +
-#     "\n and is " + str(describe_weather))
-# else:
-#     print(".zip code not found. Please try again: ")
+weather_api_key = os.environ.get("weather_api_key")
+
+while True:
+    zip_code = input("Please enter a 5 digit .zip code for your weather report: ")
+    if not zip_code.isdigit():
+        print("Your .zip code contains non-numerical digits. Please try again: ")
+    if len(zip_code) >5:
+        print("Your .zip code contains too many digits. Please try again: ")
+    if len(zip_code) <5:
+        print("Your .zip code contains too few digits. Please try again: ")
+    if zip_code.isdigit() and len(zip_code) == 5:
+        break
+
+def temp_format(temperatures):
+    return '{:,.2f}'.format(temperatures)
+
+weather_url = "https://api.openweathermap.org/data/2.5/weather?" + "appid=" + weather_api_key + "&q=" + zip_code
+forecast_response = requests.get(weather_url)
+response_key = forecast_response.json() # https://www.geeksforgeeks.org/python-find-current-weather-of-any-city-using-openweathermap-api/
+
 
 # NEWS
 
 news_api_key = os.environ.get("news_api_key")
+
+
+
+
+#USER OUTPUTS
+while True:
+    if directions_route == "driving" or "bicycling" or "walking":
+        print("You are", directions_result[0]['legs'][0]['distance']['text'], "from your destination."
+        " Your commute time will be", directions_result[0]['legs'][0]['duration']['text'], ".")
+        break
+    if directions_route == "transit":
+        print("You are", directions_result[0]['legs'][0]['distance']['text'], "from your destination."
+        " Your commute time will be", directions_result[0]['legs'][0]['duration']['text'], "."
+        " You will arrive at", directions_result[0]['legs'][0]['arrival_time']['text'], ".") #NEED TO FIX. NOTHING APPEARS
+        break
+    else:
+        print("The travel mode was incorrectly entered. Please try again: ")
+
+if response_key["cod"] != "404":
+    main_key = response_key["main"]
+    current_temp = main_key["temp"]
+    kelvin2fahrenheit = (int(current_temp) - 273.15) * (9/5) + 32
+    weather_key = response_key["weather"]
+    describe_weather = weather_key[0]["description"]
+    weather_output = print("The current temperature is " + str(temp_format(kelvin2fahrenheit)) + " degrees Fahrenheit" +
+    "\n and is " + str(describe_weather))
+else:
+    print(".zip code not found. Please try again: ")
 
 def NYTNews(): 
     NYT_url = " https://newsapi.org/v1/articles?source=the-new-york-times&sortBy=top&apiKey=" + news_api_key #https://www.geeksforgeeks.org/fetching-top-news-using-news-api/
@@ -106,6 +114,23 @@ def NYTNews():
 
 if __name__ == '__main__': 
      NYTNews()  #invoke the function
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
