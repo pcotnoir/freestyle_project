@@ -83,16 +83,29 @@ now = datetime.now()
 #     print(".zip code not found. Please try again: ")
 
 # NEWS
-from newsapi.newsapi_client import NewsApiClient
+
 news_api_key = os.environ.get("news_api_key")
 
-news_api_var = NewsApiClient(api_key=news_api_key)
+def NYTNews(): 
+    NYT_url = " https://newsapi.org/v1/articles?source=the-new-york-times&sortBy=top&apiKey=" + news_api_key #https://www.geeksforgeeks.org/fetching-top-news-using-news-api/
+    NYT_page = requests.get(NYT_url).json()  
+    all_articles = NYT_page["articles"] 
+    top_news_titles = [] 
+    top_news_descriptions = []
+    top_news_urls = []
+      
+    for a in all_articles: 
+        top_news_titles.append(a["title"])
+        top_news_descriptions.append(a["description"]) 
+        top_news_urls.append(a["url"])
 
-nyt_news_stories = newsapi.get_top_headlines(sources='the-new-york-times')
+    for k in range(len(top_news_titles)): 
+        print(k+1,".", top_news_titles[k], "\n")
+        print(top_news_descriptions[k], "\n") 
+        print(top_news_urls[k], "\n")                 
 
-
-
-
+if __name__ == '__main__': 
+     NYTNews()  #invoke the function
 
 
 
