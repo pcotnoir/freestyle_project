@@ -64,6 +64,7 @@ response_key = forecast_response.json() # https://www.geeksforgeeks.org/python-f
 
 news_api_key = os.environ.get("news_api_key") #Obtain NewsAPI Key
 
+
 #USER OUTPUTS
 
 #Commute Times
