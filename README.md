@@ -52,6 +52,20 @@ Run the script:
 python app/project.py
 ```
 
+## Testing
+
+Install pytest (first time only):
+
+```sh
+pip install pytest
+```
+
+Run tests:
+
+```sh
+pytest
+```
+
 ## [License](/LICENSE)
 
 ## Credits
