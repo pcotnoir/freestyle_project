@@ -1,5 +1,5 @@
 # "Freestyle Project" 
-Freestyle project that serves as a morning flash briefing app. Issues requests to [Google Maps API](https://developers.google.com/maps/documentation/directions/intro) to provide commute times and distances, to [OpenWeather API](https://openweathermap.org/api) to provide current temperatures and weather conditions, and to [News API](https://newsapi.org/docs/get-started) to provide the top news headlines, intros to articles, and New York Times hyperlinks. 
+A freestyle project that serves as a morning flash briefing app. Issues requests to [Google Maps API](https://developers.google.com/maps/documentation/directions/intro) to provide commute times and distances, to [OpenWeather API](https://openweathermap.org/api) to provide current temperatures and weather conditions, and to [News API](https://newsapi.org/docs/get-started) to provide the top news headlines, intros to articles, and New York Times hyperlinks. 
 
 ## Prerequisites
 
@@ -32,7 +32,7 @@ pip install newsapi-python
 
 ## Setup
 
-Before developing the application, obtain unique API Keys for [Google Maps](https://developers.google.com/maps/documentation/javascript/get-api-key) [OpenWeather](https://openweathermap.org/appid) and [News API](https://newsapi.org/docs/get-started). 
+Before developing the application, obtain unique API Keys for [Google Maps](https://developers.google.com/maps/documentation/javascript/get-api-key), [OpenWeather](https://openweathermap.org/appid), and [News API](https://newsapi.org/docs/get-started). 
 
 After obtaining the three unique API keys, create a new environment in Virtual Editor called ".env" and update the the .env file with your API keys. For example:
 
@@ -53,3 +53,6 @@ python app/project.py
 ```
 
 ## [License](/LICENSE)
+
+## Credits
+Adopted from: [Professor Rossetti](https://github.com/prof-rossetti/robo-advisor-demo-2019/blob/master/README.md)
