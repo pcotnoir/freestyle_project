@@ -71,6 +71,8 @@ news_api_key = os.environ.get("news_api_key") #Obtain NewsAPI Key
 
 print("\n")
 print("\n")
+print("--------------------------------------------------------------------------------")
+print("--------------------------------------------------------------------------------")
 print("Commute Information: ")
 while True:
     if directions_route == "driving" or "bicycling" or "walking" or "transit": #print commute time and distance
@@ -83,6 +85,8 @@ while True:
 #Weather
 
 print("\n")
+print("--------------------------------------------------------------------------------")
+print("--------------------------------------------------------------------------------")
 print("Today's weather forecast in your area: ")
 if response_key["cod"] != "404": #https://www.geeksforgeeks.org/python-find-current-weather-of-any-city-using-openweathermap-api/
     main_key = response_key["main"]
@@ -97,6 +101,8 @@ else:
 
 #News
 print("\n")
+print("--------------------------------------------------------------------------------")
+print("--------------------------------------------------------------------------------")
 print("Today's news briefing from the New York Times: ")
 
 def NYTNews(): 
