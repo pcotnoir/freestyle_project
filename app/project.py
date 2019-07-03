@@ -29,7 +29,7 @@ while True: #https://developers.google.com/maps/documentation/directions/intro
     if preferred_transport == "walking":
         directions_route = preferred_transport
         break
-    if preferred_transport == "transit":
+    if preferred_transport == "transit": #keep code duplication to ensure elif clause works correctly.
         directions_route = preferred_transport
         break
     elif preferred_transport != "driving" or "bicycling" or "walking" or "transit":
@@ -69,8 +69,7 @@ news_api_key = os.environ.get("news_api_key") #Obtain NewsAPI Key
 
 #Commute Times
 
-print("\n")
-print("\n")
+print("\n", "\n")
 print("--------------------------------------------------------------------------------")
 print("--------------------------------------------------------------------------------")
 print("Commute Information: ")
